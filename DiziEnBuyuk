@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int tmp, i, dizi[10] = {2,3,4,1,9,8,2,6};
+    tmp = dizi[0];
+    for(i = 1; i < 10; i++)
+    {
+     if(dizi[i] > tmp)
+     {
+         tmp = dizi[i];
+     }
+    }
+    printf("Max deger = %d", tmp);
+    return 0;
+}
