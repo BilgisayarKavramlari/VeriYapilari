@@ -1,0 +1,64 @@
+//including libraries
+#include<iostream>
+#include<time.h>
+using namespace std;
+
+#define sizeofArray 10
+#define boundary 50
+
+/*function creates array with random numbers*/
+int* CreateArray(int *Array, int size) {
+	srand((unsigned)time(NULL));//to get different random number every compilation
+	Array= new int[size];//allocating memory for array
+
+	//loop for filling array with random number between 0 - 50
+	for (int i = 0;i < size;i++) {
+		Array[i] = rand() % boundary;
+	}
+	return Array;//returns random array
+}
+
+/*Bubble sort Algorithm */
+/* Worst case : O(n^2)
+   Average case : Θ(n^2)
+   Best case : Ω(n) */
+void BubbleSort(int arrayToSort[],int size) {
+	int temp;
+	//loop for sorting process
+	for (int i = 1;i <= size - 1;i++)
+	{
+		for (int j = 0;j <= size - i - 1;j++)
+		{
+			//swapping
+			if (arrayToSort[j] > arrayToSort[j + 1])
+			{
+				temp = arrayToSort[j];
+				arrayToSort[j] = arrayToSort[j + 1];
+				arrayToSort[j + 1] = temp;
+			}
+		}
+	}
+}
+
+//function for printing array
+void printArray(int *list) {
+	cout << "[ ";
+	for (int i = 0;i < sizeofArray;i++)
+	{
+		cout << list[i] <<(i!=sizeofArray-1?" , ":" ] ");
+	}
+	cout << endl;
+}
+
+void main()
+{
+	int *list=NULL;//declaration of pointer is going to be array
+
+	//calling function to create random array
+	list = CreateArray(list, sizeofArray);
+	cout << "Original Array:" << endl;
+	printArray(list);//calling function to print array
+	BubbleSort(list,sizeofArray);//calling function to sort array
+	cout << "Sorted Array: " << endl;
+	printArray(list);//calling function to print array
+}
