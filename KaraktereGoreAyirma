@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+  
+  char mail[255];
+  int a = 0;
+  printf("Mailinizi Giriniz : ");
+  scanf("%s", &mail);
+  while(mail[a] != '@')
+  {
+  	a++;
+  }
+  
+  printf("Kullanici Adi : ");
+  for(int i = 0; i < a; i++) printf("%c", mail[i]);
+  printf("\n");
+  printf("Host Adi : ");
+  for(int i = a+1; i < strlen(mail); i++) printf("%c", mail[i]);
+
+  return 0;
+}
