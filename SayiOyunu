@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+int main(){
+  
+  srand(time(NULL));
+  int a, b, c = 0;
+  a = rand() % 100;
+  while(a != b)
+  {
+    printf("Sayi Tahmininiz :");
+    scanf("%d", &b);
+    c++;
+  }
+  printf("Tebrikler %d. Tahminde Bildiniz!", c);
+
+
+  return 0;
+}
