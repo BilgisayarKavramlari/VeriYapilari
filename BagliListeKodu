@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct dugum{
+    struct dugum *sonraki;
+    int deger;
+};
+
+struct dugum *ilk ,*son;
+
+void dizi_olustur(int dizi[],int boyut){
+    for(int i=0;i<boyut;i++){
+        dizi[i]=i*10;
+    }
+}
+
+void ekle(int eklenecek_eleman){
+    struct dugum *ekleme = (struct dugum *)malloc(sizeof(struct dugum));
+    ekleme->deger = eklenecek_eleman;
+    ekleme->sonraki = NULL;
+    if(ilk==NULL){
+        ilk = ekleme;
+        son = ilk;
+    }
+    else{
+        son->sonraki = ekleme;
+        son=son->sonraki;
+    }
+}
+
+void yazdir(){
+    struct dugum *yazdir = ilk;
+    while(yazdir!=NULL){
+        printf("%d ",yazdir->deger);
+        yazdir = yazdir->sonraki;
+    }
+}
+
+int main(){
+    
+    int dizi[10];
+    dizi_olustur(dizi,10);
+    ekle(dizi[0]);
+    ekle(dizi[1]);
+    ekle(dizi[2]);
+    ekle(dizi[3]);
+    yazdir();
+    return 0;
+}
