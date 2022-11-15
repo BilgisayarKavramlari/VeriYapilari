@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Bağlı liste yapısı
+typedef struct l_list
+{
+	int sayi;
+	struct l_list* sonraki;
+}b_liste; //typedef ile değişken tipini daha kısa yazmayı amaçlıyoruz.
+
+//Dairesel bağlı liste yapısı
+typedef struct cl_list
+{
+	int sayi;
+	struct cl_list* sonraki;
+	struct cl_list* onceki;
+}db_liste;
+
+b_liste* ilk_b = NULL;
+db_liste* ilk_db = NULL;
+
+void bagli_dizi_olustur(int* a, int boyut)
+{
+	int i = 0;
+	if (ilk_b == NULL)
+	{
+		ilk_b = (b_liste*)malloc(sizeof(b_liste));
+		ilk_b->sayi = a[i];
+		ilk_b->sonraki = NULL;
+		i++;
+	}
+	b_liste* temp = (b_liste*)malloc(sizeof(b_liste));
+	temp = ilk_b;
+	while (i < boyut) //Dizi boyutu kadar sayı eklenecek
+	{
+		b_liste* temp_ekle = (b_liste*)malloc(sizeof(b_liste));
+		temp_ekle->sayi = a[i];
+		temp_ekle->sonraki = NULL;
+		temp->sonraki = temp_ekle;
+		temp = temp->sonraki;
+		i++;
+	}
+}
+
+void baglidan_dairesel_cift_olustur()
+{
+	b_liste* temp_b = (b_liste*)malloc(sizeof(b_liste));
+	db_liste* prev_db = (db_liste*)malloc(sizeof(db_liste));
+	if (ilk_db == NULL)
+	{
+		ilk_db = (db_liste*)malloc(sizeof(db_liste));
+		ilk_db->sayi = ilk_b->sayi;
+		ilk_db->onceki = ilk_db;
+		ilk_db->sonraki = ilk_db;
+		temp_b = ilk_b->sonraki;
+		prev_db = ilk_db;
+	}
+	while (temp_b != NULL)//Yapım aşamasında
+	{
+		db_liste* temp_db = (db_liste*)malloc(sizeof(db_liste));
+		temp_db->sayi = temp_b->sayi;
+		temp_db->onceki = prev_db;
+		temp_db->sonraki = ilk_db;
+		prev_db->sonraki = temp_db;
+		ilk_db->onceki = temp_db;
+		prev_db = temp_db;
+		temp_b = temp_b->sonraki;
+	}
+}
+
+int main()
+{
+	int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	bagli_dizi_olustur(a, 10);
+	baglidan_dairesel_cift_olustur();
+}
