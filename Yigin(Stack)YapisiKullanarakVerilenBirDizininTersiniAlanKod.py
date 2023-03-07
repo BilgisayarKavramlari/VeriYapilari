@@ -1,3 +1,5 @@
+# ARRAY (DİZİ) ÜZERİNDE STACK YAPISI
+
 # Stack sınıf yapısı oluşturmak
 class Stack:
     def __init__(self, boyut):
